@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Kotanga"
         tools:targetApi="31">
         <activity
+            android:name=".Compte_Activity"
+            android:exported="false" />
+        <activity
             android:name=".Forgot_Password_Activity"
             android:exported="false" />
         <activity
