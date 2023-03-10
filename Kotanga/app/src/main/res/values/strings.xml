@@ -13,8 +13,13 @@
     <string name="btn_login">Connexion</string>
     <string name="login_email">Email</string>
     <string name="login_password">Your password</string>
+    <string name="register_nom">Nom</string>
+    <string name="register_prenom">Prenom</string>
     <string name="forgot_password">Mot de passe oublié?</string>
     <string name="login_haven_account">
         Je n\'ai pas de compte : <font color="#006cac"><b>s\'inscrire</b></font>
+    </string>
+    <string name="register_have_account">
+        J\'ai déjà un compte : <font color="#006cac"><b>connexion</b></font>
     </string>
 </resources>
