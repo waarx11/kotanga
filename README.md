@@ -6,14 +6,16 @@ geometry: margin=2cm
 # Kotanga
 
 ## Description
-**Notre application** porte pour nom Kotanga faisant référence à ...
-Elle à pour but de faciliter les paiment entre amis, au sein d'un groupe de personne, colloques, famille, ...
+**Notre application** porte pour nom Kotanga ce qui signifie **compter** en Lingala.
 
+Elle à pour but de faciliter les paiment entre amis, au sein d'un groupe de personne, colloques, famille, ...
 
 
 ## Fonctionnalité
 
 ### Authentification
+
+### Profil
 
 ### Groupe
 
@@ -32,5 +34,6 @@ Elle à pour but de faciliter les paiment entre amis, au sein d'un groupe de per
 
 ### Sécurisé
 
-### Open source
+### Chiffrement
 
+### Open source
