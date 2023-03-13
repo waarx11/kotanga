@@ -23,6 +23,8 @@ Elle à pour but de faciliter les paiment entre amis, au sein d'un groupe de per
 
 ### Paiement
 
+### Ticket
+
 
 ## Pourquoi nous choisir
 
