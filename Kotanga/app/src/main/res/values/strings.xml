@@ -12,7 +12,7 @@
     <string name="btn_register">Inscription</string>
     <string name="btn_login">Connexion</string>
     <string name="login_email">Email</string>
-    <string name="login_password">Your password</string>
+    <string name="login_password">Mot de passe</string>
     <string name="register_nom">Nom</string>
     <string name="register_prenom">Prenom</string>
     <string name="forgot_password">Mot de passe oublié?</string>
