@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Kotanga</string>
+    <string name="started_title_started">Les bons comptes font de bons amis
+        <br><b>Connexion</b>
+            Si vous avez un compte.</br>
+        <br><b>Inscription</b>
+            Pour commencer à utiliser l’application.
+        </br>
+    </string>
+    <string name="started_title">Les bons comptes font de bons amis</string>
+    <string name="Logo_app">Logo</string>
+    <string name="btn_register">Inscription</string>
+    <string name="btn_login">Connexion</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Mot de passe</string>
+    <string name="register_nom">Nom</string>
+    <string name="register_prenom">Prenom</string>
+    <string name="forgot_password">Mot de passe oublié?</string>
+    <string name="login_haven_account">
+        Je n\'ai pas de compte : <font color="#006cac"><b>s\'inscrire</b></font>
+    </string>
+    <string name="register_have_account">
+        J\'ai déjà un compte : <font color="#006cac"><b>connexion</b></font>
+    </string>
+    <string name="btn_forgot_password">Recevoir un lien de réinitialisation</string>
+    <string name="title_forgot_password">Mot de passe oublié</string>
+    <string name="valid_password">Confirmation de mot de passe</string>
+    <string name="title_account">Mon compte</string>
+    <string name="home_title">Hello Word
+    Welcome to home</string>
+    <string name="btn_logout">Déconnection</string>
+</resources>
