@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import org.w3c.dom.Text
 
@@ -60,19 +61,10 @@ class RegisterActivity : AppCompatActivity() {
                             // Sign in success, update UI with the signed-in user's information
                             val user = auth.currentUser
                             updateUI(user)
-                            val profileUpdates = UserProfileChangeRequest.Builder()
-                                .setDisplayName("$sName $sSurname")
-                                .build()
-                            user?.updateProfile(profileUpdates)
-                                ?.addOnCompleteListener { updateTask ->
-                                    if (!updateTask.isSuccessful) {
-                                        Toast.makeText(
-                                            baseContext,
-                                            "Erreur sur l'ajout du nom et du prenom de l'utilisateur.",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                                }
+                            val database = Firebase.database
+                            val userId = Firebase.auth.currentUser?.uid
+                            val userRef = database.getReference("users/$userId/name")
+                            userRef.setValue("$sName $sSurname")
                         }
                         else {
                             // If sign in fails, display a message to the user.

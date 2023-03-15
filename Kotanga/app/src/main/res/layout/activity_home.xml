@@ -16,6 +16,14 @@
         android:textAlignment="center"
         style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"/>
 
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+        />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"

@@ -26,7 +26,6 @@
     <string name="title_forgot_password">Mot de passe oublié</string>
     <string name="valid_password">Confirmation de mot de passe</string>
     <string name="title_account">Mon compte</string>
-    <string name="home_title">Hello Word
-    Welcome to home</string>
+    <string name="home_title">Welcome to home</string>
     <string name="btn_logout">Déconnection</string>
 </resources>
