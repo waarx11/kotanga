@@ -38,19 +38,28 @@ class LoginActivity : AppCompatActivity() {
             val sEmail = tvEmail.text.toString().trim()
             val sPassword = tvPassword.text.toString().trim()
 
-            auth.signInWithEmailAndPassword(sEmail, sPassword)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        val user = auth.currentUser
-                        updateUI(user)
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(baseContext, "Authentification impossible.",
-                            Toast.LENGTH_SHORT).show()
-                        //updateUI(null)
+            if(!sEmail.isNullOrEmpty() and !sPassword.isNullOrEmpty()) {
+                auth.signInWithEmailAndPassword(sEmail, sPassword)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            val user = auth.currentUser
+                            updateUI(user)
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(
+                                baseContext, "Authentification impossible.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            //updateUI(null)
+                        }
                     }
-                }
+            }else{
+                Toast.makeText(
+                    baseContext, "Merci de remplir les champs.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         binding.tvHavenAccount.setOnClickListener{

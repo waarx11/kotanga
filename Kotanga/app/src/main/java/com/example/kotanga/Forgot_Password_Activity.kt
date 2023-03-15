@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class Forgot_Password_Activity : AppCompatActivity() {
 
-    private lateinit var etPassword:EditText
+    private lateinit var etEMail:EditText
 
     private lateinit var auth: FirebaseAuth
 
@@ -22,18 +22,18 @@ class Forgot_Password_Activity : AppCompatActivity() {
         binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        etPassword = findViewById(R.id.et_password)
+        etEMail = findViewById(R.id.et_email)
 
         auth = FirebaseAuth.getInstance()
 
         binding.btnLien.setOnClickListener{
-            val sPassword = etPassword.text.toString()
-            auth.sendPasswordResetEmail(sPassword)
+            val sEmail = etEMail.text.toString()
+            auth.sendPasswordResetEmail(sEmail)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Vérifiez votre Email", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Mail envoyer avec succes!", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Mail inconnue!", Toast.LENGTH_SHORT).show()
                 }
 
             startActivity(Intent(this, LoginActivity::class.java))

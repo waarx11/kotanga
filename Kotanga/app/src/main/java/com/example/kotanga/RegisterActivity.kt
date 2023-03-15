@@ -53,7 +53,7 @@ class RegisterActivity : AppCompatActivity() {
             val sPassword = tvPassword.text.toString().trim()
             val sValPassword = tvValPassword.text.toString().trim()
 
-            if (sPassword == sValPassword) {
+            if (sPassword.equals(sValPassword)) {
                 auth.createUserWithEmailAndPassword(sEmail, sPassword)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
