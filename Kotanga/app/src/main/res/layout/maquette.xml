@@ -58,8 +58,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/img_logo_started"
         app:layout_constraintEnd_toStartOf="@id/bell" />
 
-
-
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
