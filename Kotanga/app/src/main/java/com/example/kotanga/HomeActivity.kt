@@ -28,7 +28,7 @@ class HomeActivity : AppCompatActivity() {
         val userId = Firebase.auth.currentUser?.uid
         val userRef = database.getReference("users/$userId/name")
 
-        userRef.addValueEventListener(object : ValueEventListener {
+        /*userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val name = dataSnapshot.getValue(String::class.java)
                 Log.d(TAG, "User name is: $name")
@@ -38,11 +38,11 @@ class HomeActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 Log.w(TAG, "Failed to read value.", error.toException())
             }
-        })
+        })*/
 
 
-        binding.btnLogout.setOnClickListener{
+        /*binding.btnLogout.setOnClickListener{
             startActivity(Intent(this, LoginActivity::class.java))
-        }
+        }*/
     }
 }

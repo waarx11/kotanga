@@ -13,8 +13,8 @@ class Kotanga : Application() {
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
-        val database = FirebaseDatabase.getInstance().reference
-        database.child("message").setValue("Bonjour, Firebase !")
+        /*val database = FirebaseDatabase.getInstance().reference
+        database.child("message").setValue("Bonjour, Firebase !")*/
 
         /*database.child("message").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
