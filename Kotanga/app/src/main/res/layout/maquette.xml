@@ -26,14 +26,14 @@
         android:fontFamily="@font/montserrat"
         android:text="@string/app_name"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/img_logo_started"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.32"
         app:layout_constraintStart_toStartOf="@+id/img_logo_started"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.384"/>
+        app:layout_constraintVertical_bias="0.384" />
 
     <ImageButton
         android:id="@+id/bell"
@@ -57,106 +57,6 @@
         android:src="@drawable/ic_favorite_bookmark"
         app:layout_constraintBottom_toBottomOf="@+id/img_logo_started"
         app:layout_constraintEnd_toStartOf="@id/bell" />
-
-    <TextView
-        android:id="@+id/account_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/title_account"
-        android:textColor="@color/black"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        app:layout_goneMarginTop="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_logo_started"/>
-
-    <LinearLayout
-        android:id="@+id/titles"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/account_title"
-        android:orientation="horizontal"
-        android:layout_marginTop="25dp"
-        android:background="@android:color/transparent">
-
-        <Button
-            android:id="@+id/info_button"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="@string/personal_information_title"
-            android:textColor="@color/black"
-            android:textSize="11sp"
-            android:background="@android:color/transparent"
-            android:drawableBottom="@drawable/ic_personal_information"/>
-
-        <Button
-            android:id="@+id/payment_button"
-            android:layout_width="0dp"
-            android:layout_weight="1.25"
-            android:layout_height="wrap_content"
-            android:text="@string/payment_information_title"
-            android:textColor="@color/black"
-            android:textSize="11sp"
-            android:background="@android:color/transparent"
-            android:drawableBottom="@drawable/ic_wallet"/>
-
-        <Button
-            android:id="@+id/notif_button"
-            android:layout_width="0dp"
-            android:layout_weight="1.25"
-            android:layout_height="wrap_content"
-            android:text="@string/notification_title"
-            android:textColor="@color/black"
-            android:textSize="11sp"
-            android:background="@android:color/transparent"
-            android:drawableBottom="@drawable/ic_bell2"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/underline"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_rounded_corner"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@id/titles">
-
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="1dp"
-            android:background="@drawable/bg_rounded_line" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="0.1"
-            android:layout_height="2dp"
-            android:background="@android:color/transparent" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="1dp"
-            android:background="@drawable/bg_rounded_line" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="0.1"
-            android:layout_height="2dp"
-            android:background="@android:color/transparent" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="1dp"
-            android:background="@drawable/bg_rounded_line" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/toolbar"

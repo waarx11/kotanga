@@ -28,4 +28,8 @@
     <string name="title_account">Mon compte</string>
     <string name="home_title">Welcome to home</string>
     <string name="btn_logout">Déconnection</string>
+
+    <string name="personal_information_title">Mes données</string>
+    <string name="notification_title">Mes notifications</string>
+    <string name="payment_information_title">Mes moyens de paiment</string>
 </resources>
