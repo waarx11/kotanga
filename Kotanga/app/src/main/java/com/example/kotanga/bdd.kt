@@ -5,14 +5,14 @@ import com.google.firebase.database.*
 class User {
     var id: String? = null
     var name: String? = null
-    var groupIds: List<Groupe>? = null
+    var groupIds: MutableList<Groupe>? = null
     // Ajouter d'autres champs ici si nécessaire
 }
 
 class Groupe {
     var id: String? = null
     var name: String? = null
-    var usersIds: List<User>? = null
+    var usersIds: MutableList<User>? = null
     // Ajouter d'autres champs ici si nécessaire
 }
 
@@ -92,6 +92,46 @@ class FirebaseManager {
                 completion(true, "Le nom de l'utilisateur a été mis à jour avec succès.")
             } else {
                 completion(false, "Une erreur est survenue : ${task.exception?.message}")
+            }
+        }
+    }
+
+    // Ajoute un groupe à la liste des groupes d'un utilisateur
+// La méthode prend l'ID de l'utilisateur et l'objet groupe en entrée ainsi qu'une closure completion.
+// La closure completion est appelée à la fin de l'opération pour renvoyer un booléen indiquant si l'opération s'est bien déroulée
+    fun addGroupeToUserGroups(userId: String, groupe: Groupe, completion: (Boolean) -> Unit) {
+        getUserById(userId) { user ->
+            if (user != null) {
+                if (user.groupIds == null) {
+                    user.groupIds = mutableListOf(groupe)
+                } else {
+                    user.groupIds?.add(groupe)
+                }
+                usersRef.child(userId).child("groupIds").setValue(user.groupIds).addOnCompleteListener { task ->
+                    completion(task.isSuccessful)
+                }
+            } else {
+                completion(false)
+            }
+        }
+    }
+
+    // Ajoute un utilisateur à la liste des utilisateurs d'un groupe
+// La méthode prend l'ID du groupe et l'objet utilisateur en entrée ainsi qu'une closure completion.
+// La closure completion est appelée à la fin de l'opération pour renvoyer un booléen indiquant si l'opération s'est bien déroulée
+    fun addUserToGroupeUsers(groupeId: String, user: User, completion: (Boolean) -> Unit) {
+        getGroupeById(groupeId) { groupe ->
+            if (groupe != null) {
+                if (groupe.usersIds == null) {
+                    groupe.usersIds = mutableListOf(user)
+                } else {
+                    groupe.usersIds?.add(user)
+                }
+                groupesRef.child(groupeId).child("usersIds").setValue(groupe.usersIds).addOnCompleteListener { task ->
+                    completion(task.isSuccessful)
+                }
+            } else {
+                completion(false)
             }
         }
     }
