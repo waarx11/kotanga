@@ -44,5 +44,10 @@ class HomeActivity : AppCompatActivity() {
         binding.accountbutton.setOnClickListener{
             startActivity(Intent(this, Compte_Activity::class.java))
         }
+
+        binding.chatbutton.setOnClickListener{
+            startActivity(Intent(this, GroupMenu_Activity::class.java))
+        }
+
     }
 }
