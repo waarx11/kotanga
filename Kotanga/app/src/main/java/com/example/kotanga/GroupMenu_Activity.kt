@@ -69,6 +69,36 @@ class GroupMenu_Activity : AppCompatActivity() {
                 val groupNameEditText = view.findViewById<EditText>(R.id.group_name_textfield)
                 val groupName = groupNameEditText.text.toString()
 
+                // Generate a key for the new group
+                val groupKey = database.reference.child("groups").push().key
+
+                // Add the new group to the database
+                if (groupKey != null) {
+                    val groupData = hashMapOf<String, Any>(
+                        "name" to groupName,
+                        "users" to hashMapOf(userId to true)
+                    )
+                    database.reference.child("groups").child(groupKey).setValue(groupData)
+                        .addOnSuccessListener {
+                            // Create a button for the new group
+                            val groupButton = Button(this)
+                            groupButton.text = groupName
+                            groupButton.layoutParams = LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                            )
+                            groupButton.gravity = Gravity.CENTER_HORIZONTAL
+                            groupLayout.addView(groupButton)
+
+                            groupButton.setOnClickListener{
+                                val intent = Intent(this, Group_Activity::class.java)
+                                intent.putExtra("groupName", groupName)
+                                intents.add(intent)
+                                startActivity(intent)
+                            }
+                        }
+                }
+
                 // Add the new group to the currentUser's groups
                 currentUser.child("groups").child(groupName).setValue(true)
 
