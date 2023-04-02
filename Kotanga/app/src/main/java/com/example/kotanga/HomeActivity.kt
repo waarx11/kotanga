@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import com.example.kotanga.databinding.ActivityHomeBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -28,21 +27,22 @@ class HomeActivity : AppCompatActivity() {
         val userId = Firebase.auth.currentUser?.uid
         val userRef = database.getReference("users/$userId/name")
 
-        /*userRef.addValueEventListener(object : ValueEventListener {
+        userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val name = dataSnapshot.getValue(String::class.java)
+                val firstName = name?.substringBefore(" ")
                 Log.d(TAG, "User name is: $name")
-                binding.tvName.text = name
+
+                binding.tvName.text = "Bienvenue : $firstName"
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Log.w(TAG, "Failed to read value.", error.toException())
             }
-        })*/
+        })
 
-
-        /*binding.btnLogout.setOnClickListener{
-            startActivity(Intent(this, LoginActivity::class.java))
-        }*/
+        binding.accountbutton.setOnClickListener{
+            startActivity(Intent(this, Compte_Activity::class.java))
+        }
     }
 }

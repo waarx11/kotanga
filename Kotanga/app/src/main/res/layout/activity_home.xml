@@ -58,6 +58,28 @@
         app:layout_constraintBottom_toBottomOf="@+id/img_logo_started"
         app:layout_constraintEnd_toStartOf="@id/bell" />
 
+    <TextView
+        android:id="@+id/home_title"
+        style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/home_title"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_logo_started" />
+
+
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
