@@ -60,10 +60,6 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(this, Compte_Activity::class.java))
         }
 
-        /*binding.chatbutton.setOnClickListener{
-            startActivity(Intent(this, GroupMenu_Activity::class.java))
-        }*/
-
         currentUser.child("groups").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 groupLayout.removeAllViews()
