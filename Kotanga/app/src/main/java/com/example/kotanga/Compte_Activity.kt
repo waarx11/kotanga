@@ -43,10 +43,13 @@ class Compte_Activity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val name = dataSnapshot.getValue(String::class.java)
                 val firstName = name?.substringBefore(" ")
-                val lastName = name?.substringAfterLast(" ")
+                val lastName = name?.substringAfter(" ")
+                val nomVal = lastName?.substringBefore(" ")
+                val EMail = name?.substringAfterLast(" ")
 
-                binding.nameCompte.text = "Nom : $lastName"
+                binding.nameCompte.text = "Nom : $nomVal"
                 binding.prenomCompte.text = "\nPrénom : $firstName"
+                binding.emailCompte.text = "\nMail : $EMail"
             }
 
             override fun onCancelled(error: DatabaseError) {

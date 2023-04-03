@@ -64,7 +64,7 @@ class RegisterActivity : AppCompatActivity() {
                             val database = Firebase.database
                             val userId = Firebase.auth.currentUser?.uid
                             val userRef = database.getReference("users/$userId/name")
-                            userRef.setValue("$sName $sSurname")
+                            userRef.setValue("$sSurname $sName $sEmail")
                         }
                         else {
                             // If sign in fails, display a message to the user.
