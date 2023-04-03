@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
 import com.example.kotanga.databinding.ActivityCompteBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -28,6 +29,10 @@ class Compte_Activity : AppCompatActivity() {
         binding = ActivityCompteBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val mesDonnes = findViewById<LinearLayout>(R.id.linear_Donnee)
+        val moyenPaiement = findViewById<LinearLayout>(R.id.linear_Paiement)
+        val notifGroup = findViewById<LinearLayout>(R.id.linear_Notif)
+
+
 
         val database = Firebase.database
         val userId = Firebase.auth.currentUser?.uid
@@ -40,8 +45,8 @@ class Compte_Activity : AppCompatActivity() {
                 val firstName = name?.substringBefore(" ")
                 val lastName = name?.substringAfterLast(" ")
 
-                /*binding.name_compte.text = "Nom : $lastName"
-                binding.prenom_compte.text = "Prénom : $firstName"*/
+                binding.nameCompte.text = "Nom : $lastName"
+                binding.prenomCompte.text = "\nPrénom : $firstName"
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -53,9 +58,28 @@ class Compte_Activity : AppCompatActivity() {
             startActivity(Intent(this, HomeActivity::class.java))
         }
 
-        /*binding.info_button.setOnClickListener{
-            mesDonnes.visibility = LinearLayout.VISIBLE // Rend l'élément invisible
-        }*/
+        binding.infoButton.setOnClickListener{
+            moyenPaiement.visibility = LinearLayout.INVISIBLE
+            notifGroup.visibility = LinearLayout.INVISIBLE
+            mesDonnes.visibility = LinearLayout.VISIBLE
+        }
+
+        binding.paymentButton.setOnClickListener{
+            mesDonnes.visibility = LinearLayout.INVISIBLE
+            notifGroup.visibility = LinearLayout.INVISIBLE
+            moyenPaiement.visibility = LinearLayout.VISIBLE
+        }
+
+        binding.notifButton.setOnClickListener{
+            mesDonnes.visibility = LinearLayout.INVISIBLE
+            moyenPaiement.visibility = LinearLayout.INVISIBLE
+            notifGroup.visibility = LinearLayout.VISIBLE
+        }
+
+        binding.btnDeconnexion.setOnClickListener{
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
 
     }
 }
