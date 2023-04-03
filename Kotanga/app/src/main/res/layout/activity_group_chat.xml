@@ -278,7 +278,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <Button
         android:id="@+id/middle_button"
         android:layout_width="75dp"
         android:layout_height="75dp"
