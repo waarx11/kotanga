@@ -17,8 +17,10 @@ class GroupChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_group_chat)
         binding = ActivityGroupChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val groupName = intent.getStringExtra("groupName")
 
-        binding.groupName.text = "GroupName"
+
+        binding.groupName.text = "$groupName"
 
         binding.homebutton.setOnClickListener{
             startActivity(Intent(this, HomeActivity::class.java))
