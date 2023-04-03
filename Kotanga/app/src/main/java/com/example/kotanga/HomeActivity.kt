@@ -35,12 +35,12 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         createGroupButton = findViewById(R.id.create_group_button)
 
+        groupLayout = findViewById(R.id.group_layout)
+
         val database = Firebase.database
         val userId = Firebase.auth.currentUser?.uid
         val userRef = database.getReference("users/$userId/name")
         currentUser = database.getReference("users/$userId")
-
-        groupLayout = findViewById(R.id.group_layout)
 
         userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
