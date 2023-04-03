@@ -32,4 +32,5 @@
     <string name="personal_information_title">Mes données</string>
     <string name="notification_title">Mes notifications</string>
     <string name="payment_information_title">Mes moyens de paiment</string>
+    <string name="btn_add_grp">Créer groupe</string>
 </resources>

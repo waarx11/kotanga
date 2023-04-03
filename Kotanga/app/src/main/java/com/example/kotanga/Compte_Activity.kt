@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.kotanga.databinding.ActivityCompteBinding
+import com.example.kotanga.databinding.ActivityHomeBinding
 
 class Compte_Activity : AppCompatActivity() {
 
@@ -15,8 +16,8 @@ class Compte_Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_compte)
         binding = ActivityCompteBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.homebutton.setOnClickListener{
             startActivity(Intent(this, HomeActivity::class.java))
