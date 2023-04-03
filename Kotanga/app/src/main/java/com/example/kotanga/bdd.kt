@@ -1,6 +1,7 @@
 package com.example.kotanga
 
 import com.google.firebase.database.*
+import java.util.Date
 
 class User {
     var id: String? = null
@@ -9,10 +10,17 @@ class User {
     // Ajouter d'autres champs ici si nécessaire
 }
 
+class Message {
+    var date = Date()
+    var content: String? = null
+    var userIdSender: String? = null
+}
+
 class Groupe {
     var id: String? = null
     var name: String? = null
     var usersIds: List<User>? = null
+    var messages: List<Message>? = null
     // Ajouter d'autres champs ici si nécessaire
 }
 
@@ -94,6 +102,10 @@ class FirebaseManager {
                 completion(false, "Une erreur est survenue : ${task.exception?.message}")
             }
         }
+    }
+
+    fun addMessage(message: Message, groupId: String) {
+
     }
 }
 
