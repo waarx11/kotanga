@@ -32,13 +32,18 @@ Nous souhaitons aussi incorporer la possibilité de pouvoir scanner les tickets 
 ## Pourquoi nous choisir
 
 ### Avantage
+Sur notre application, vous serez averti dès qu'un autre utilisateur d'un même groupe que vous envoie un message, actualise ses dettes, déclare une nouvelle dépense et autre...
 
 ### Gain de temps
+Le scanner vous permettra un gain de temps lorsque vous souhaitez déclarer une nouvelle dépense.
 
 ### Gratuit
+L'application est totalement gratuite et sans pub !
 
 ### Sécurisé
+Vos données ne sont accessibles qu'à vous et vous seul et sont stockées sur une base de données complétement sécurisée.
 
 ### Chiffrement
+En plus d'être stockées sur une base de données sécurisée, elle sont aussi chiffrée. Ainsi, même nous qui entretenons la base de données n'y auront pas accès.
 
 ### Open source
