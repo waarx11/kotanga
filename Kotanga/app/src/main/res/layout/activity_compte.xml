@@ -163,14 +163,14 @@
         android:id="@+id/linear_Donnee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-50dp"
         android:orientation="vertical"
         android:padding="8dp"
-        android:layout_marginTop="-50dp"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/btn_modifier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/underline"
-        android:visibility="visible" >
+        app:layout_constraintTop_toBottomOf="@+id/underline">
 
         <TextView
             android:id="@+id/name_compte"
@@ -190,16 +190,16 @@
 
         <TextView
             android:id="@+id/email_compte"
+            style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
             android:text="\nMail: "
             android:textSize="20sp" />
 
         <TextView
+            style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
 
             android:text="\nMot de passe : "
             android:textSize="20sp" />
@@ -210,14 +210,14 @@
         android:id="@+id/linear_Paiement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-130dp"
         android:orientation="vertical"
         android:padding="8dp"
-        android:layout_marginTop="-130dp"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btn_modifier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/underline"
-        android:visibility="invisible" >
+        app:layout_constraintTop_toBottomOf="@+id/underline">
 
         <TextView
             android:id="@+id/mastercard_compte"
@@ -241,67 +241,70 @@
         android:id="@+id/linear_Notif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-130dp"
         android:orientation="vertical"
         android:padding="8dp"
-        android:layout_marginTop="-130dp"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btn_modifier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/underline"
-        android:visibility="invisible" >
+        app:layout_constraintTop_toBottomOf="@+id/underline">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/notifs_group"
-            style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Message de groupe "
-            android:textSize="20sp" />
-        <Switch
-            android:id="@+id/my_switch_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn="ON"
-            android:textOff="OFF"
-            android:layout_gravity="end"
-            tools:ignore="MissingConstraints,UseSwitchCompatOrMaterialXml" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/notifs_privée"
-            style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Message privée "
-            android:textSize="20sp" />
+            <TextView
+                android:id="@+id/notifs_group"
+                style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Message de groupe "
+                android:textSize="20sp" />
 
-        <Switch
-            android:id="@+id/my_switch_privee"
-            android:layout_width="wrap_content"
+            <Switch
+                android:id="@+id/my_switch_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textOff="OFF"
+                android:textOn="ON"
+                tools:ignore="MissingConstraints,UseSwitchCompatOrMaterialXml" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textOn="ON"
-            android:textOff="OFF"
-            android:layout_gravity="end"
-            tools:ignore="MissingConstraints,UseSwitchCompatOrMaterialXml" />
-    </LinearLayout>
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/notifs_privée"
+                style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Message privée "
+                android:textSize="20sp" />
+
+            <Switch
+                android:id="@+id/my_switch_privee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textOff="OFF"
+                android:textOn="ON"
+                tools:ignore="MissingConstraints,UseSwitchCompatOrMaterialXml" />
+        </LinearLayout>
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_deconnexion"
+        android:id="@+id/btn_modifier"
         style="@style/ButtonWhite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_deco"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
+        android:text="Modifier"
+        app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -358,7 +361,7 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/view2"
+        android:id="@+id/view"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginBottom="22dp"
@@ -367,6 +370,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/middle_button"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@null"
+        android:rotation="0"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_logout_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

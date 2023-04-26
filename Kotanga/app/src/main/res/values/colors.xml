@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary_color">#EAEFF9</color>
     <color name="grey">#888888</color>
+    <color name="red">#FF5733</color>
     <color name="btn_black">#343C44</color>
     <color name="forgot_password">#006cac</color>
     <color name="grey8LIGHT">#F0F0F0</color>

@@ -123,5 +123,9 @@ class GroupChatActivity : AppCompatActivity() {
         binding.accountbutton.setOnClickListener{
             startActivity(Intent(this, Compte_Activity::class.java))
         }
+
+        binding.parambutton.setOnClickListener{
+            startActivity(Intent(this, ParametersActivity::class.java))
+        }
     }
 }

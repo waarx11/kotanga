@@ -83,7 +83,7 @@ class Compte_Activity : AppCompatActivity() {
             notifGroup.visibility = LinearLayout.VISIBLE
         }
 
-        binding.btnDeconnexion.setOnClickListener{
+        binding.middleButton.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(this, LoginActivity::class.java))
         }

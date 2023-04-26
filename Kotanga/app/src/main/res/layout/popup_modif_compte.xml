@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/popup_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/popup_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Modification des informations"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="16dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/mail_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Adresse Mail : "
+                    android:textSize="16sp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/mdp_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mot de passe : "
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="10dp" />
+
+                <TextView
+                    android:id="@+id/carteBanque_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mastercard : "
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="10dp" />
+
+                <TextView
+                    android:id="@+id/rib_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RIB : "
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginStart="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/mail_textfield"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mail"
+                    android:enabled="true"
+                    android:focusable="true"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColorHint="#999999"
+                    android:textSize="20sp"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/mdp_textfield"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mot de passe"
+                    android:enabled="true"
+                    android:focusable="true"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColorHint="#999999"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/carteBanque_textfield"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="XXXX-XXXX-XXXX-XXXX"
+                    android:enabled="true"
+                    android:focusable="true"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColorHint="#999999"
+                    android:padding="10dp"/>
+
+                <EditText
+                    android:id="@+id/rib_textfield"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="xxxxxxxxxxxxxxxxxxxxxxx"
+                    android:enabled="true"
+                    android:focusable="true"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColorHint="#999999"
+                    android:padding="10dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_deconnexion"
+            style="@style/ButtonWhite"
+            android:layout_marginTop="50sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Validé"/>
+
+    </LinearLayout>
+</RelativeLayout>
+

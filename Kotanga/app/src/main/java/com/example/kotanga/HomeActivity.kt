@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.PopupMenu
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.kotanga.databinding.ActivityHomeBinding
 import com.google.firebase.auth.ktx.auth
@@ -20,7 +17,7 @@ import com.google.firebase.ktx.Firebase
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var createGroupButton: Button
+    private lateinit var middleButton : ImageButton
 
     companion object {
         const val TAG = "HomeActivity"
@@ -33,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        createGroupButton = findViewById(R.id.create_group_button)
+        middleButton = findViewById(R.id.middle_button)
 
         groupLayout = findViewById(R.id.group_layout)
 
@@ -91,7 +88,7 @@ class HomeActivity : AppCompatActivity() {
             }
         })
 
-        createGroupButton.setOnClickListener {
+        middleButton.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             val view = LayoutInflater.from(this).inflate(R.layout.popup_create_group, null)
             builder.setView(view)
