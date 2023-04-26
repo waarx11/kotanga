@@ -60,6 +60,10 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(this, Compte_Activity::class.java))
         }
 
+        binding.settingbutton.setOnClickListener{
+            startActivity(Intent(this, ParametersActivity::class.java))
+        }
+
         currentUser.child("groups").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 groupLayout.removeAllViews()

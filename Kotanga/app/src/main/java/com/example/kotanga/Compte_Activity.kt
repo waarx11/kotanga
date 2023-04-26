@@ -61,6 +61,10 @@ class Compte_Activity : AppCompatActivity() {
             startActivity(Intent(this, HomeActivity::class.java))
         }
 
+        binding.settingbutton.setOnClickListener{
+            startActivity(Intent(this, ParametersActivity::class.java))
+        }
+
         binding.infoButton.setOnClickListener{
             moyenPaiement.visibility = LinearLayout.INVISIBLE
             notifGroup.visibility = LinearLayout.INVISIBLE

@@ -34,4 +34,5 @@
     <string name="payment_information_title">Mes moyens de paiment</string>
     <string name="btn_add_grp">Créer groupe</string>
     <string name="btn_deco">DECONNEXION</string>
+    <string name="param_title">Paramètre</string>
 </resources>
