@@ -4,10 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.ListView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.kotanga.databinding.ActivityGroupChatBinding
 import com.example.kotanga.databinding.ActivityHomeBinding
@@ -20,7 +17,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class GroupChatActivity : AppCompatActivity() {
-    private lateinit var addUserInGroup: Button
+    private lateinit var addUserInGroup: ImageButton
     private lateinit var groupLayout: LinearLayout
     private lateinit var currentUser: DatabaseReference
     private lateinit var groupName: String
@@ -76,7 +73,7 @@ class GroupChatActivity : AppCompatActivity() {
                         val selectedUserName = userList[position]
 
                         // Add the selected user to the current group
-                        database.reference.child("groupes").child(groupName).child("users").child(selectedUserName).setValue(true)
+                        database.reference.child("groupes").child(groupName).child("users").child(selectedUserName.replace(".", "")).setValue(true)
 
                         // Add the current group to the selected user's groups
                         val selectedUserQuery = usersRef.orderByChild("name").equalTo(selectedUserName)

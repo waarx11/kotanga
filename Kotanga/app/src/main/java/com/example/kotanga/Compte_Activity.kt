@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.LinearLayout
+import android.view.LayoutInflater
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import com.example.kotanga.databinding.ActivityCompteBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -31,7 +33,6 @@ class Compte_Activity : AppCompatActivity() {
         val mesDonnes = findViewById<LinearLayout>(R.id.linear_Donnee)
         val moyenPaiement = findViewById<LinearLayout>(R.id.linear_Paiement)
         val notifGroup = findViewById<LinearLayout>(R.id.linear_Notif)
-
 
 
         val database = Firebase.database
@@ -77,7 +78,44 @@ class Compte_Activity : AppCompatActivity() {
             moyenPaiement.visibility = LinearLayout.VISIBLE
         }
 
-        binding.notifButton.setOnClickListener{
+        /*binding.btnModifier.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            val view = LayoutInflater.from(this).inflate(R.layout.popup_modif_compte, null)
+            val mailTextField = view.findViewById<EditText>(R.id.mail_textfield)
+            builder.setView(view)
+
+            val nameRef = currentUser.child("name")
+            nameRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val name = dataSnapshot.getValue(String::class.java)
+                    name?.substringAfterLast(" ")
+                        ?.let { it1 -> currentUser.child(it1) }
+                        ?.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                // Vérifier si l'email existe
+                                if (snapshot.exists()) {
+                                    // Récupérer l'email de l'utilisateur
+                                    val email = snapshot.getValue(String::class.java)
+                                    // Afficher l'email dans l'EditText
+                                    mailTextField.setText(email)
+                                }
+                            }
+
+
+                            override fun onCancelled(error: DatabaseError) {
+                                // Gérer l'erreur
+                            }
+                        })
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }*/
+
+            binding.notifButton.setOnClickListener{
             mesDonnes.visibility = LinearLayout.INVISIBLE
             moyenPaiement.visibility = LinearLayout.INVISIBLE
             notifGroup.visibility = LinearLayout.VISIBLE
@@ -90,6 +128,5 @@ class Compte_Activity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
     }
 }
