@@ -97,6 +97,16 @@
 
     </LinearLayout>
 
+
+    <ListView
+        android:id="@+id/messageList"
+        android:layout_width="match_parent"
+        android:layout_height="100pt"
+        android:layout_weight="30"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="215dp" />
+
     <LinearLayout
         android:id="@+id/group_choice_view"
         android:layout_width="match_parent"
@@ -132,14 +142,6 @@
 
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/group_message_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout_sendMessage"
-        tools:layout_editor_absoluteX="20dp">
-
-    </ScrollView>
 
     <LinearLayout
         android:id="@+id/linearLayout_sendMessage"
@@ -190,7 +192,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
 
-    <ScrollView
+    <!--ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -212,7 +214,7 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-    </ScrollView>
+    </ScrollView!-->
 
 
     <LinearLayout
