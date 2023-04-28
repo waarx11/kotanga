@@ -105,7 +105,6 @@ class Compte_Activity : AppCompatActivity() {
                                 }
                             }
 
-
                             override fun onCancelled(error: DatabaseError) {
                                 // Gérer l'erreur
                             }

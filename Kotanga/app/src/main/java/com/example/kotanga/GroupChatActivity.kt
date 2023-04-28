@@ -22,7 +22,6 @@ class GroupChatActivity : AppCompatActivity() {
     private lateinit var currentUser: DatabaseReference
     private lateinit var groupName: String
     private lateinit var messageAdapter: ArrayAdapter<String>
-
     private lateinit var binding: ActivityGroupChatBinding
     private lateinit var dbManager: FirebaseManager
 
@@ -135,6 +134,9 @@ class GroupChatActivity : AppCompatActivity() {
         val messageRef = database.getReference("groupes/$groupName/messages")
         messageRef.orderByChild("timestamp").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Vider l'adaptateur avant d'ajouter de nouveaux messages
+                messageAdapter.clear()
+
                 for (childSnapshot in dataSnapshot.children) {
                     val message = childSnapshot.getValue(Message::class.java)
                     if (message != null) {
@@ -143,10 +145,12 @@ class GroupChatActivity : AppCompatActivity() {
                     }
                 }
             }
-            override fun onCancelled(error: DatabaseError) {
 
+            override fun onCancelled(error: DatabaseError) {
+                // Gérer l'erreur ici
             }
         })
+
 
         binding.sendMessageButton.setOnClickListener {
             val messageContent = binding.messageEditText.text.toString()
