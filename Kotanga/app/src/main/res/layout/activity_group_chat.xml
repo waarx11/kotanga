@@ -209,13 +209,11 @@
 
     <ImageButton
         android:id="@+id/group_chat_button"
-        android:layout_width="0dp"
-        android:layout_height="20dp"
-        android:layout_weight="20"
-        android:layout_marginBottom="5dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@null"
         android:src="@drawable/ic_chat"
-        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent" />
 
 
@@ -419,6 +417,27 @@
 
     </LinearLayout>
 
+    <ListView
+        android:id="@+id/balanceList"
+        android:layout_width="match_parent"
+        android:layout_height="100pt"
+        android:layout_weight="30"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_choice_view"
+        tools:ignore="MissingConstraints" />
+
+    <ListView
+        android:id="@+id/transactionList"
+        android:layout_width="match_parent"
+        android:layout_height="100pt"
+        android:layout_weight="30"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_choice_view"
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:id="@+id/toolbar"

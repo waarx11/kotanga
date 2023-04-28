@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.kotanga.databinding.ActivityGroupChatBinding
+import com.google.api.Distribution.BucketOptions.Linear
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -98,15 +99,19 @@ class GroupChatActivity : AppCompatActivity() {
         spinnerPrice.adapter = adapterPrice
         spinnerPrice.setSelection(0);
 
+        setAllInvisible()
+        binding.messageList.visibility = Button.VISIBLE
+        binding.linearLayoutSendMessage.visibility = LinearLayout.VISIBLE
+
         spending_bouton.setOnClickListener {
             spending_bouton.backgroundTintList = lightgrey
             group_transaction_button.backgroundTintList = primarycolor
             group_balance_button.backgroundTintList = primarycolor
 
             //affichage du contenu
-            binding.messageList.visibility = ScrollView.INVISIBLE
-            binding.linearLayoutSendMessage.visibility = LinearLayout.INVISIBLE
+            setAllInvisible()
             binding.depenses.visibility = LinearLayout.VISIBLE
+            binding.chatbutton.visibility = Button.VISIBLE
         }
 
         group_balance_button.setOnClickListener {
@@ -116,8 +121,9 @@ class GroupChatActivity : AppCompatActivity() {
             spending_bouton.backgroundTintList = primarycolor
 
             //affichage du contenu
-            binding.messageList.visibility = ScrollView.INVISIBLE
-            binding.linearLayoutSendMessage.visibility = LinearLayout.INVISIBLE
+            setAllInvisible()
+            binding.balanceList.visibility = Button.VISIBLE
+            binding.chatbutton.visibility = Button.VISIBLE
         }
 
         group_transaction_button.setOnClickListener {
@@ -126,13 +132,20 @@ class GroupChatActivity : AppCompatActivity() {
             spending_bouton.backgroundTintList = primarycolor
 
             //affichage du contenu
-            binding.messageList.visibility = ScrollView.INVISIBLE
-            binding.linearLayoutSendMessage.visibility = LinearLayout.INVISIBLE
+            setAllInvisible()
+            binding.chatbutton.visibility = Button.VISIBLE
+            binding.transactionList.visibility = Button.VISIBLE
+        }
 
+        binding.groupChatButton.setOnClickListener {
+            setAllInvisible()
+            binding.messageList.visibility = Button.VISIBLE
+            binding.linearLayoutSendMessage.visibility = LinearLayout.VISIBLE
         }
 
         addDepense.setOnClickListener {
             binding.depenses.visibility = LinearLayout.INVISIBLE
+            binding.chatbutton.visibility = Button.VISIBLE
             binding.addDepenses.visibility = LinearLayout.VISIBLE
         }
 
@@ -273,67 +286,74 @@ class GroupChatActivity : AppCompatActivity() {
                 }
             })
 
-            binding.sendMessageButton.setOnClickListener {
-                val messageContent = binding.messageEditText.text.toString()
-                val userId = Firebase.auth.currentUser?.uid
-                val userRef = database.getReference("users/$userId/name")
-                userRef.addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        val name = dataSnapshot.getValue(String::class.java)
-                        val firstName = name?.substringBefore(" ")
-                        val lastName = name?.substringAfter(" ")
-                        val nomVal = lastName?.substringBefore(" ")
-                        val authorName = firstName + " " + nomVal
-                        writeMessage(groupName, messageContent, authorName)
-                    }
-
-                    override fun onCancelled(databaseError: DatabaseError) {
-                        // Gérer l'erreur ici
-                    }
-                })
-
-                binding.messageEditText.text.clear()
-            }
-        }
-
-        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            super.onActivityResult(requestCode, resultCode, data)
-            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
-                try {
-                    val imageBitmap = data.getParcelableExtra<Bitmap>("data")
-                    val file = File.createTempFile("image_", ".jpg", cacheDir)
-                    val outputStream = FileOutputStream(file)
-                    imageBitmap?.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-                    outputStream.flush()
-                    outputStream.close()
-
-                    // Afficher la photo dans l'ImageView
-                    val bitmap = BitmapFactory.decodeFile(file.path)
-                    imageView.setImageBitmap(bitmap)
-                } catch (e: IOException) {
-                    e.printStackTrace()
+        binding.sendMessageButton.setOnClickListener {
+            val messageContent = binding.messageEditText.text.toString()
+            val userId = Firebase.auth.currentUser?.uid
+            val userRef = database.getReference("users/$userId/name")
+            userRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val name = dataSnapshot.getValue(String::class.java)
+                    val firstName = name?.substringBefore(" ")
+                    val lastName = name?.substringAfter(" ")
+                    val nomVal = lastName?.substringBefore(" ")
+                    val authorName = firstName + " " + nomVal
+                    writeMessage(groupName, messageContent, authorName)
                 }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                        // Gérer l'erreur ici
+                }
+            })
+            binding.messageEditText.text.clear()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
+            try {
+                val imageBitmap = data.getParcelableExtra<Bitmap>("data")
+                val file = File.createTempFile("image_", ".jpg", cacheDir)
+                val outputStream = FileOutputStream(file)
+                imageBitmap?.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+                outputStream.flush()
+                outputStream.close()
+
+                // Afficher la photo dans l'ImageView
+                val bitmap = BitmapFactory.decodeFile(file.path)
+                imageView.setImageBitmap(bitmap)
+            } catch (e: IOException) {
+                e.printStackTrace()
             }
         }
     }
 
-    data class Message(
-        val author: String = "",
-        val content: String = "",
-        val timestamp: Long = 0
-    )
-
-    fun writeMessage(groupName: String, messageContent: String, authorName: String) {
-        val database = Firebase.database
-        val groupRef = database.reference.child("groupes").child(groupName)
-        val messageRef = groupRef.child("messages").push()
-
-        val message = Message(authorName, messageContent, System.currentTimeMillis())
-        messageRef.setValue(message)
+    private fun setAllInvisible() {
+        binding.messageList.visibility = ScrollView.INVISIBLE
+        binding.linearLayoutSendMessage.visibility = LinearLayout.INVISIBLE
+        binding.groupChatButton.visibility = Button.INVISIBLE
+        binding.depenses.visibility = LinearLayout.INVISIBLE
+        binding.balanceList.visibility = Button.INVISIBLE
+        binding.transactionList.visibility = Button.INVISIBLE
     }
+}
 
-    fun addDepense(groupName: String, depense: Depense){
-        val database = Firebase.database
-        val groupRef = database.reference.child("groupes").child(groupName)
+data class Message(
+     val author: String = "",
+     val content: String = "",
+     val timestamp: Long = 0
+)
 
-    }
+fun writeMessage(groupName: String, messageContent: String, authorName: String) {
+    val database = Firebase.database
+    val groupRef = database.reference.child("groupes").child(groupName)
+    val messageRef = groupRef.child("messages").push()
+
+    val message = Message(authorName, messageContent, System.currentTimeMillis())
+    messageRef.setValue(message)
+}
+
+fun addDepense(groupName: String, depense: Depense){
+    val database = Firebase.database
+    val groupRef = database.reference.child("groupes").child(groupName)
+}
