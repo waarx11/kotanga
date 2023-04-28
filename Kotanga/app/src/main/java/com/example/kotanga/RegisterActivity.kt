@@ -1,5 +1,6 @@
 package com.example.kotanga
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -47,6 +48,8 @@ class RegisterActivity : AppCompatActivity() {
 
         tvValPassword = findViewById(R.id.et_valid_password)
 
+        this.setBackgroundColor()
+
         binding.btnRegister.setOnClickListener {
             val sEmail = tvEmail.text.toString().trim()
             val sName = name.text.toString().trim()
@@ -86,5 +89,15 @@ class RegisterActivity : AppCompatActivity() {
     }
     private fun updateUI(user: FirebaseUser?) {
         startActivity(Intent(this,LoginActivity::class.java))
+    }
+
+    private fun setBackgroundColor() {
+        val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        var isNightModeOn = sharedPreferences.getBoolean("isNightModeOn", false)
+        if (isNightModeOn) {
+            binding.root.setBackgroundColor(resources.getColor(R.color.primary_color_darkMode))
+        } else {
+            binding.root.setBackgroundColor(resources.getColor(R.color.primary_color))
+        }
     }
 }

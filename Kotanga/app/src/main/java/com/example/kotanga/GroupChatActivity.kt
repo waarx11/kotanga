@@ -1,5 +1,6 @@
 package com.example.kotanga
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,6 +33,7 @@ class GroupChatActivity : AppCompatActivity() {
         setContentView(binding.root)
         val groupNameTop = intent.getStringExtra("groupName")
 
+        this.setBackgroundColor()
 
         val messageEditText: EditText = findViewById(R.id.messageEditText)
 
@@ -168,6 +170,15 @@ class GroupChatActivity : AppCompatActivity() {
         }
         }
 
+    private fun setBackgroundColor() {
+        val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        var isNightModeOn = sharedPreferences.getBoolean("isNightModeOn", false)
+        if (isNightModeOn) {
+            binding.root.setBackgroundColor(resources.getColor(R.color.primary_color_darkMode))
+        } else {
+            binding.root.setBackgroundColor(resources.getColor(R.color.primary_color))
+        }
+    }
 
     }
     data class Message(
