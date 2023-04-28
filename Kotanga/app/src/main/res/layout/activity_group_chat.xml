@@ -267,18 +267,17 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true"
-        android:isScrollContainer="false"
-        android:windowSoftInputMode="adjustNothing"
         android:background="@drawable/bg_rounded_corner"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
             android:id="@+id/homebutton"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_home" />
@@ -286,8 +285,8 @@
         <ImageButton
             android:id="@+id/chatbutton"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_keyboard" />
@@ -295,14 +294,13 @@
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            />
+            android:layout_weight="1" />
 
         <ImageButton
             android:id="@+id/accountbutton"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_account" />
@@ -310,8 +308,8 @@
         <ImageButton
             android:id="@+id/settingbutton"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_setting" />
