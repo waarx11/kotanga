@@ -45,7 +45,7 @@ class GroupChatActivity : AppCompatActivity() {
         addUserInGroup = findViewById(R.id.middle_button) // Ajout de l'ID du bouton
         //groupLayout = findViewById(R.id.group_layout) // Ajout de l'ID de la vue parente
 
-        /*addUserInGroup.setOnClickListener {
+        addUserInGroup.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             val view = LayoutInflater.from(this).inflate(R.layout.popup_add_user_to_group, null)
             builder.setView(view)
@@ -108,7 +108,7 @@ class GroupChatActivity : AppCompatActivity() {
 
             val dialog = builder.create()
             dialog.show()
-        }*/
+        }
 
         binding.groupName.text = "$groupNameTop"
 
