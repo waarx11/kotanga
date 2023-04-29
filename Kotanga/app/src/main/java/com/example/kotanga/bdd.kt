@@ -9,10 +9,22 @@ class User {
     // Ajouter d'autres champs ici si nécessaire
 }
 
+class Depense {
+    var id: String? = null
+    var name: String? = null
+    var type: String? = null
+    var date: String? = null
+    var price: Float? = null
+    var priceType: String? = null
+    var payBy: User? = null
+    var payFor: User? = null
+}
+
 class Groupe {
     var id: String? = null
     var name: String? = null
     var usersIds: MutableList<User>? = null
+    var depenses: MutableList<Depense>? = null
     // Ajouter d'autres champs ici si nécessaire
 }
 
@@ -128,6 +140,23 @@ class FirebaseManager {
                     groupe.usersIds?.add(user)
                 }
                 groupesRef.child(groupeId).child("usersIds").setValue(groupe.usersIds).addOnCompleteListener { task ->
+                    completion(task.isSuccessful)
+                }
+            } else {
+                completion(false)
+            }
+        }
+    }
+
+    fun addDepenseToGroupeDepenses(groupeId: String, depense: Depense, completion: (Boolean) -> Unit) {
+        getGroupeById(groupeId) { groupe ->
+            if (groupe != null) {
+                if (groupe.depenses == null) {
+                    groupe.depenses = mutableListOf(depense)
+                } else {
+                    groupe.depenses?.add(depense)
+                }
+                groupesRef.child(groupeId).child("usersIds").setValue(groupe.depenses).addOnCompleteListener { task ->
                     completion(task.isSuccessful)
                 }
             } else {

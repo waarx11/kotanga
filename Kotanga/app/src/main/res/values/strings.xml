@@ -1,4 +1,4 @@
-<resources>
+    <resources>
     <string name="app_name">Kotanga</string>
     <string name="started_title_started">Les bons comptes font de bons amis
         <br><b>Connexion</b>
@@ -35,4 +35,24 @@
     <string name="btn_add_grp">Créer groupe</string>
     <string name="btn_deco">DECONNEXION</string>
     <string name="param_title">Paramètre</string>
+
+        <string-array name="spinner_items">
+            <item>Alimentation</item>
+            <item>Assurance</item>
+            <item>Logement</item>
+            <item>Sport</item>
+            <item>Loyer &amp; charges</item>
+            <item>Restaurant &amp; bars</item>
+            <item>Shopping</item>
+            <item>Transport</item>
+            <item>Éducation</item>
+            <item>Musique</item>
+            <item>Jeux-vidéo</item>
+        </string-array>
+        <string-array name="spinner_price">
+            <item>€</item>
+            <item>£</item>
+            <item>$</item>
+            <item>cad</item>
+        </string-array>
 </resources>
