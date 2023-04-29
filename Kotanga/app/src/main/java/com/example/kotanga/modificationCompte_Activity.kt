@@ -88,7 +88,6 @@ class modificationCompte_Activity : AppCompatActivity() {
         }
     }
 
-
     data class Info(
         val mastercard: String = "",
         val rib: String = ""
