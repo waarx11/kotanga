@@ -163,7 +163,7 @@
         android:id="@+id/linear_Donnee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-50dp"
+        android:layout_marginTop="-70dp"
         android:orientation="vertical"
         android:padding="8dp"
         android:visibility="visible"
@@ -224,6 +224,7 @@
             style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
             android:text="\nRIB : XXXX-XXX-XXX-XXXX"
             android:textSize="20sp" />
     </LinearLayout>
