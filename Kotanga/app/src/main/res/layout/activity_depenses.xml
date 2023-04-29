@@ -6,7 +6,8 @@
     android:orientation="horizontal"
     android:padding="10dp"
     android:background="@drawable/bg_rounded_diamond"
-    android:backgroundTint="@color/light_red">
+    android:backgroundTint="@color/light_red"
+    android:layout_margin="10dp">
 
     <TextView
         android:id="@+id/depense_name"
@@ -14,7 +15,7 @@
         android:layout_weight="1.5"
         android:layout_height="wrap_content"
         android:gravity="start"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primary_color"
         android:textSize="22sp"/>
 
     <TextView
@@ -34,7 +35,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="22sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primary_color"
         />
 
     <ImageView
@@ -50,7 +51,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="22sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primary_color"
         />
 
 </LinearLayout>

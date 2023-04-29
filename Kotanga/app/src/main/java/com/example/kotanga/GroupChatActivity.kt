@@ -1,5 +1,6 @@
 package com.example.kotanga
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -65,17 +66,77 @@ class GroupChatActivity : AppCompatActivity() {
         groupName =
             intent.getStringExtra("groupName")
                 .toString() // Récupération du nom du groupe depuis l'intent
+        val groupeRef = database.reference.child("groupes").child(groupName)
 
-        //Récupération des users du groupes
 
+
+        //Récupération des users du groupes et mis dans les spinners
+
+        val userList = mutableListOf<String>()
+        val usersgroup = database.getReference("groupes/$groupName/usersIds")
+
+        val spinnerUser = findViewById<Spinner>(R.id.depense_pay_by_spinner)
+        val spinnerUser2 = findViewById<Spinner>(R.id.depense_pay_to_spinner)
+
+        usersgroup.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Parcourez les enfants de la liste des utilisateurs et ajoutez les noms d'utilisateurs à la liste mutable
+                for (childSnapshot in dataSnapshot.children) {
+                    val userId = childSnapshot.getValue(String::class.java)
+                    if (userId != null) {
+                        val userRef = database.getReference("users/$userId")
+                        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                val username = snapshot.child("name").getValue(String::class.java)
+                                if (username != null) {
+                                    userList.add(username)
+                                }
+                                // Créez un adaptateur de spinner en utilisant la liste mutable
+                                val adapter = ArrayAdapter(this@GroupChatActivity , android.R.layout.simple_spinner_item, userList)
+                                // Définissez le style de la liste déroulante
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                                // Attachez l'adaptateur au spinner
+                                spinnerUser.adapter = adapter
+                                spinnerUser2.adapter = adapter
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                // Gérez les erreurs ici
+                            }
+                        })
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Gérez les erreurs ici
+            }
+        })
 
 
 
         //Affichage des dépenses
 
         val depenseList = findViewById<ListView>(R.id.depense_list)
-        // val adapter = DepensesAdapter(this,""" mettre la liste des dépenses""",""CurrentUser"")
-        //depenseList.adapter = adapter
+        val depenseRef = database.getReference("groupes/$groupName/depenses")
+
+        depenseRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val depenses = mutableListOf<Depense>()
+                for (childSnapshot in dataSnapshot.children) {
+                    val depense = childSnapshot.getValue(Depense::class.java)
+                    if (depense != null) {
+                        depenses.add(depense)
+                    }
+                }
+                val adapter = DepensesAdapter(this@GroupChatActivity, depenses, userId!!)
+                depenseList.adapter = adapter
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Gérez les erreurs ici
+            }
+        })
 
 
         val spending_bouton = findViewById<Button>(R.id.group_spending_button)
@@ -166,7 +227,7 @@ class GroupChatActivity : AppCompatActivity() {
             depense.name = binding.depenseNameEditText.text.toString()
             depense.type = binding.depenseTypeSpinner.selectedItem.toString()
             depense.date = binding.depenseDateEdittexte.text.toString()
-            depense.price = binding.depensePriceEdittexte.text.toString().toFloat()
+                depense.price = binding.depensePriceEdittexte.text.toString().toFloat()
             depense.priceType = binding.depensePriceSpinner.selectedItem.toString()
             //depense.payBy = binding.depensePayBySpinner.selectedItem
             //depense.payedFor = binding.depensePayToSpinner.text.toString()
