@@ -113,7 +113,7 @@
             android:layout_weight="30"
             android:layout_height="20pt"
             android:text="Dépenses"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/group_balance_button"
@@ -227,13 +227,11 @@
 
     <ImageButton
         android:id="@+id/group_chat_button"
-        android:layout_width="0dp"
-        android:layout_height="20dp"
-        android:layout_weight="20"
-        android:layout_marginBottom="5dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@null"
         android:src="@drawable/ic_chat"
-        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent" />
 
 
@@ -262,6 +260,203 @@
 
     </ScrollView!-->
 
+    <LinearLayout
+        android:id="@+id/depenses"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.57"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_choice_view"
+        android:visibility="invisible">
+
+        <ListView
+            android:id="@+id/depense_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30"
+            android:scrollbars="vertical"
+            android:scrollingCache="true"
+            />
+
+        <Button
+            android:id="@+id/add_depense_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:text="Ajouter"
+            android:background="@drawable/bg_add_depense_bouton"
+            android:layout_margin="10dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/add_depenses"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.57"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_choice_view"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/depense_name_EditText"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="Nom"
+                android:enabled="true"
+                android:focusable="true"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColorHint="#999999"
+                android:textSize="20sp"
+                android:layout_margin="10dp"
+                />
+
+            <ImageButton
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:layout_margin="10dp"
+                />
+
+
+        </LinearLayout>
+
+
+
+        <Spinner
+            android:id="@+id/depense_type_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            />
+
+        <LinearLayout
+            android:id="@+id/date_prix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            >
+
+            <EditText
+                android:id="@+id/depense_date_edittexte"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:hint="Date"
+                android:enabled="true"
+                android:focusable="true"
+                android:inputType="date"
+                android:maxLines="1"
+                android:textColorHint="#999999"
+                android:textSize="20sp"
+                android:layout_marginRight="15dp"/>
+
+            <EditText
+                android:id="@+id/depense_price_edittexte"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:hint="Prix"
+                android:enabled="true"
+                android:focusable="true"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:textColorHint="#999999"
+                android:textSize="20sp"
+                android:layout_marginRight="5dp"/>
+
+            <Spinner
+                android:id="@+id/depense_price_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/depense_pay_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Payé par"
+            android:textSize="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="5dp"            />
+
+        <Spinner
+            android:id="@+id/depense_pay_by_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"            />
+
+        <TextView
+            android:id="@+id/depense_pay_for"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Payé pour"
+            android:textSize="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="5dp"
+            />
+
+        <Spinner
+            android:id="@+id/depense_pay_to_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            />
+
+        <Button
+            android:id="@+id/add_depense_button2"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:text="Ajouter"
+            android:background="@drawable/bg_add_depense_bouton"
+            android:layout_margin="10dp"
+            />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/balanceList"
+        android:layout_width="match_parent"
+        android:layout_height="100pt"
+        android:layout_weight="30"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_choice_view"
+        tools:ignore="MissingConstraints" />
+
+    <ListView
+        android:id="@+id/transactionList"
+        android:layout_width="match_parent"
+        android:layout_height="100pt"
+        android:layout_weight="30"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_choice_view"
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:id="@+id/toolbar"
