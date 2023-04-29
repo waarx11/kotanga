@@ -54,7 +54,9 @@ class GroupChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_group_chat)
         binding = ActivityGroupChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val groupNameTop = intent.getStringExtra("groupName")
+        binding.groupName.text = groupNameTop
 
         this.setBackgroundColor()
 
