@@ -2,7 +2,6 @@ package com.example.kotanga
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 
-class DepensesAdapter(context: Context, depenses: List<Depense>, private val currentUser: String) :
+class DepensesAdapter(context: Context, depenses: MutableList<Depense>, private val currentUser: String) :
     ArrayAdapter<Depense>(context, R.layout.activity_depenses, depenses) {
 
     @SuppressLint("SetTextI18n")

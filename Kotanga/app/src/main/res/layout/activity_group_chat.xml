@@ -87,7 +87,7 @@
             android:textSize="20sp" />
 
         <ImageButton
-            android:id="@+id/parambutton"
+            android:id="@+id/persGroupe"
             android:layout_width="0dp"
             android:layout_weight="15"
             android:layout_height="match_parent"
@@ -289,6 +289,29 @@
             android:text="Ajouter"
             android:background="@drawable/bg_add_depense_bouton"
             android:layout_margin="10dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/personneGroupe"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.57"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_choice_view"
+        android:visibility="invisible">
+
+        <ListView
+            android:id="@+id/personneListe"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30"
+            android:scrollbars="vertical"
+            android:scrollingCache="true"
             />
 
     </LinearLayout>

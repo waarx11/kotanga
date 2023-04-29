@@ -9,6 +9,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -26,10 +27,6 @@ import com.google.firebase.ktx.Firebase
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.time.Instant.now
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.util.*
 
 
 class GroupChatActivity : AppCompatActivity() {
@@ -120,6 +117,7 @@ class GroupChatActivity : AppCompatActivity() {
         //Affichage des dépenses
 
         val depenseList = findViewById<ListView>(R.id.depense_list)
+        val usersListe = findViewById<ListView>(R.id.personneListe)
         val depenseRef = database.getReference("groupes/$groupName/depenses")
 
         depenseRef.addValueEventListener(object : ValueEventListener {
@@ -195,7 +193,6 @@ class GroupChatActivity : AppCompatActivity() {
             //affichage du contenu
             setAllInvisible()
             binding.balanceList.visibility = Button.VISIBLE
-            binding.chatbutton.visibility = Button.VISIBLE
         }
 
         group_transaction_button.setOnClickListener {
@@ -205,7 +202,6 @@ class GroupChatActivity : AppCompatActivity() {
 
             //affichage du contenu
             setAllInvisible()
-            binding.chatbutton.visibility = Button.VISIBLE
             binding.transactionList.visibility = Button.VISIBLE
         }
 
@@ -217,7 +213,6 @@ class GroupChatActivity : AppCompatActivity() {
 
         addDepense.setOnClickListener {
             binding.depenses.visibility = LinearLayout.INVISIBLE
-            binding.chatbutton.visibility = Button.VISIBLE
             binding.addDepenses.visibility = LinearLayout.VISIBLE
             binding.addDepenseButton2.visibility = Button.VISIBLE
         }
@@ -347,8 +342,10 @@ class GroupChatActivity : AppCompatActivity() {
                 startActivity(Intent(this, Compte_Activity::class.java))
             }
 
-            binding.parambutton.setOnClickListener {
-                startActivity(Intent(this, ParametersActivity::class.java))
+            binding.persGroupe.setOnClickListener {
+                setAllInvisible()
+                binding.personneGroupe.visibility = LinearLayout.VISIBLE
+                binding.addDepenseButton2.visibility = Button.VISIBLE
             }
 
             messageAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
@@ -376,6 +373,27 @@ class GroupChatActivity : AppCompatActivity() {
                 // Gérer l'erreur ici
             }
         })
+
+        /*val utilisateurRef = database.getReference("groupes/$groupName/users")
+
+        val myListUser = mutableListOf<String>()
+        utilisateurRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (childSnapshot in dataSnapshot.children) {
+                    val value = childSnapshot.getValue()
+                    if (value is String) {
+                        val userName = value.substringAfterLast(" ")
+                        myListUser.add(userName)
+                    }
+                }
+                val adapter = ArrayAdapter(this@GroupChatActivity, android.R.layout.simple_list_item_1, myListUser)
+                usersListe.adapter = adapter
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w(HomeActivity.TAG, "Failed to read value.", error.toException())
+            }
+        })*/
 
 
         binding.sendMessageButton.setOnClickListener {
@@ -433,7 +451,6 @@ class GroupChatActivity : AppCompatActivity() {
     private fun setAllInvisible() {
         binding.messageList.visibility = ScrollView.INVISIBLE
         binding.linearLayoutSendMessage.visibility = LinearLayout.INVISIBLE
-        binding.groupChatButton.visibility = Button.INVISIBLE
         binding.depenses.visibility = LinearLayout.INVISIBLE
         binding.balanceList.visibility = Button.INVISIBLE
         binding.transactionList.visibility = Button.INVISIBLE
