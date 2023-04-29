@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 
-class DepensesAdapter(context: Context, depenses: List<Depense>, private val currentUser: User) :
+class DepensesAdapter(context: Context, depenses: List<Depense>, private val currentUser: String) :
     ArrayAdapter<Depense>(context, R.layout.activity_depenses, depenses) {
 
     @SuppressLint("SetTextI18n")
@@ -29,7 +29,7 @@ class DepensesAdapter(context: Context, depenses: List<Depense>, private val cur
 
         val depense = getItem(position)
 
-        if (depense?.payBy != currentUser) {
+        if (depense?.payBy?.id != currentUser) {
             background.backgroundTintList = lightRed
             price.setTextColor((ContextCompat.getColor(context, R.color.red)))
         }
