@@ -25,6 +25,8 @@ class ParametersActivity : AppCompatActivity() {
         binding = ActivityParametersBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        this.setBackgroundColor()
+
         switchDarkMode = binding.switchDarkMode
 
         val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
@@ -64,5 +66,15 @@ class ParametersActivity : AppCompatActivity() {
         super.onResume()
         isNightModeOn = getSharedPreferences("myPrefs", Context.MODE_PRIVATE).getBoolean("isNightModeOn", false)
         switchDarkMode.isChecked = isNightModeOn
+    }
+
+    private fun setBackgroundColor() {
+        val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        var isNightModeOn2 = sharedPreferences.getBoolean("isNightModeOn", false)
+        if (isNightModeOn2) {
+            binding.root.setBackgroundColor(resources.getColor(R.color.primary_color_darkMode))
+        } else {
+            binding.root.setBackgroundColor(resources.getColor(R.color.primary_color))
+        }
     }
 }
