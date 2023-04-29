@@ -195,14 +195,6 @@
             android:layout_height="wrap_content"
             android:text="\nMail: "
             android:textSize="20sp" />
-
-        <TextView
-            style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="\nMot de passe : "
-            android:textSize="20sp" />
     </LinearLayout>
 
 

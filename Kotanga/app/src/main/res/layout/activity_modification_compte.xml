@@ -53,17 +53,6 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/mdp_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:text="Mot de passe : "
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
                     android:id="@+id/carteBanque_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -105,18 +94,6 @@
                     android:text="Mail"
                     android:textColorHint="#999999"
                     android:textSize="20sp" />
-
-                <EditText
-                    android:id="@+id/mdp_textfield"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="true"
-                    android:focusable="true"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:padding="10dp"
-                    android:text="Mot de passe"
-                    android:textColorHint="#999999" />
 
                 <EditText
                     android:id="@+id/carteBanque_textfield"
