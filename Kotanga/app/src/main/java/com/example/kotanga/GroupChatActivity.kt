@@ -1,6 +1,6 @@
 package com.example.kotanga
 
-import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
@@ -45,7 +45,6 @@ class GroupChatActivity : AppCompatActivity() {
     private lateinit var currentGroup: DatabaseReference
     private lateinit var groupName: String
     private lateinit var messageAdapter: ArrayAdapter<String>
-
     private lateinit var binding: ActivityGroupChatBinding
     private lateinit var dbManager: FirebaseManager
 
@@ -56,6 +55,7 @@ class GroupChatActivity : AppCompatActivity() {
         setContentView(binding.root)
         val groupNameTop = intent.getStringExtra("groupName")
 
+        this.setBackgroundColor()
 
         val messageEditText: EditText = findViewById(R.id.messageEditText)
 
@@ -65,17 +65,77 @@ class GroupChatActivity : AppCompatActivity() {
         groupName =
             intent.getStringExtra("groupName")
                 .toString() // Récupération du nom du groupe depuis l'intent
+        val groupeRef = database.reference.child("groupes").child(groupName)
 
-        //Récupération des users du groupes
 
+
+        //Récupération des users du groupes et mis dans les spinners
+
+        val userList = mutableListOf<String>()
+        val usersgroup = database.getReference("groupes/$groupName/usersIds")
+
+        val spinnerUser = findViewById<Spinner>(R.id.depense_pay_by_spinner)
+        val spinnerUser2 = findViewById<Spinner>(R.id.depense_pay_to_spinner)
+
+        usersgroup.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Parcourez les enfants de la liste des utilisateurs et ajoutez les noms d'utilisateurs à la liste mutable
+                for (childSnapshot in dataSnapshot.children) {
+                    val userId = childSnapshot.getValue(String::class.java)
+                    if (userId != null) {
+                        val userRef = database.getReference("users/$userId")
+                        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                val username = snapshot.child("name").getValue(String::class.java)
+                                if (username != null) {
+                                    userList.add(username)
+                                }
+                                // Créez un adaptateur de spinner en utilisant la liste mutable
+                                val adapter = ArrayAdapter(this@GroupChatActivity , android.R.layout.simple_spinner_item, userList)
+                                // Définissez le style de la liste déroulante
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                                // Attachez l'adaptateur au spinner
+                                spinnerUser.adapter = adapter
+                                spinnerUser2.adapter = adapter
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                // Gérez les erreurs ici
+                            }
+                        })
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Gérez les erreurs ici
+            }
+        })
 
 
 
         //Affichage des dépenses
 
         val depenseList = findViewById<ListView>(R.id.depense_list)
-        // val adapter = DepensesAdapter(this,""" mettre la liste des dépenses""",""CurrentUser"")
-        //depenseList.adapter = adapter
+        val depenseRef = database.getReference("groupes/$groupName/depenses")
+
+        depenseRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val depenses = mutableListOf<Depense>()
+                for (childSnapshot in dataSnapshot.children) {
+                    val depense = childSnapshot.getValue(Depense::class.java)
+                    if (depense != null) {
+                        depenses.add(depense)
+                    }
+                }
+                val adapter = DepensesAdapter(this@GroupChatActivity, depenses, userId!!)
+                depenseList.adapter = adapter
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Gérez les erreurs ici
+            }
+        })
 
 
         val spending_bouton = findViewById<Button>(R.id.group_spending_button)
@@ -166,7 +226,7 @@ class GroupChatActivity : AppCompatActivity() {
             depense.name = binding.depenseNameEditText.text.toString()
             depense.type = binding.depenseTypeSpinner.selectedItem.toString()
             depense.date = binding.depenseDateEdittexte.text.toString()
-            depense.price = binding.depensePriceEdittexte.text.toString().toFloat()
+                depense.price = binding.depensePriceEdittexte.text.toString().toFloat()
             depense.priceType = binding.depensePriceSpinner.selectedItem.toString()
             //depense.payBy = binding.depensePayBySpinner.selectedItem
             //depense.payedFor = binding.depensePayToSpinner.text.toString()
@@ -191,6 +251,10 @@ class GroupChatActivity : AppCompatActivity() {
         addUserInGroup = findViewById(R.id.middle_button) // Ajout de l'ID du bouton
         //groupLayout = findViewById(R.id.group_layout) // Ajout de l'ID de la vue parente
 
+        addUserInGroup.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            val view = LayoutInflater.from(this).inflate(R.layout.popup_add_user_to_group, null)
+            builder.setView(view)
 
         addUserInGroup.setOnClickListener {
                 val builder = AlertDialog.Builder(this)
@@ -264,7 +328,9 @@ class GroupChatActivity : AppCompatActivity() {
                 dialog.show()
             }
 
-            binding.groupName.text = "$groupNameTop"
+            val dialog = builder.create()
+            dialog.show()
+        }
 
             binding.homebutton.setOnClickListener {
                 startActivity(Intent(this, HomeActivity::class.java))
@@ -285,22 +351,29 @@ class GroupChatActivity : AppCompatActivity() {
             messageAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
             binding.messageList.adapter = messageAdapter
 
-            val messageRef = database.getReference("groupes/$groupName/messages")
-            messageRef.orderByChild("timestamp").addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    for (childSnapshot in dataSnapshot.children) {
-                        val message = childSnapshot.getValue(Message::class.java)
-                        if (message != null) {
-                            val messageText = "${message.author}: ${message.content}"
-                            messageAdapter.add(messageText)
-                        }
+        messageAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
+        binding.messageList.adapter = messageAdapter
+
+        val messageRef = database.getReference("groupes/$groupName/messages")
+        messageRef.orderByChild("timestamp").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Vider l'adaptateur avant d'ajouter de nouveaux messages
+                messageAdapter.clear()
+
+                for (childSnapshot in dataSnapshot.children) {
+                    val message = childSnapshot.getValue(Message::class.java)
+                    if (message != null) {
+                        val messageText = "${message.author}: ${message.content}"
+                        messageAdapter.add(messageText)
                     }
                 }
+            }
 
-                override fun onCancelled(error: DatabaseError) {
+            override fun onCancelled(error: DatabaseError) {
+                // Gérer l'erreur ici
+            }
+        })
 
-                }
-            })
 
         binding.sendMessageButton.setOnClickListener {
             val messageContent = binding.messageEditText.text.toString()
@@ -321,6 +394,16 @@ class GroupChatActivity : AppCompatActivity() {
                 }
             })
             binding.messageEditText.text.clear()
+        }
+        }
+
+    private fun setBackgroundColor() {
+        val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        var isNightModeOn = sharedPreferences.getBoolean("isNightModeOn", false)
+        if (isNightModeOn) {
+            binding.root.setBackgroundColor(resources.getColor(R.color.primary_color_darkMode))
+        } else {
+            binding.root.setBackgroundColor(resources.getColor(R.color.primary_color))
         }
     }
 

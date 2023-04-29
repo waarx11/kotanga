@@ -6,7 +6,8 @@
     android:orientation="horizontal"
     android:padding="10dp"
     android:background="@drawable/bg_rounded_diamond"
-    android:backgroundTint="@color/light_red">
+    android:backgroundTint="@color/light_red"
+    android:layout_margin="10dp">
 
     <TextView
         android:id="@+id/depense_name"
