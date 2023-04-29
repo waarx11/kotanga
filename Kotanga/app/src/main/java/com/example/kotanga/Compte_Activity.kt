@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.*
@@ -62,6 +63,28 @@ class Compte_Activity : AppCompatActivity() {
             }
         })
 
+        val informations = database.getReference("groupes/$userId/informations")
+
+        informations.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val info = dataSnapshot.getValue(modificationCompte_Activity.Info::class.java)
+                val mastercard: String = info?.mastercard.toString()
+                val rib: String = info?.rib.toString()
+
+                if (info != null) {
+                    binding.mastercardCompte.text = Editable.Factory.getInstance().newEditable("Mastercard: $mastercard")
+                    binding.ribCompte.text = Editable.Factory.getInstance().newEditable("RIB:$rib")
+                } else {
+                    binding.mastercardCompte.text = Editable.Factory.getInstance().newEditable("Mastercard: 1234 5678 9012 3456")
+                    binding.ribCompte.text = Editable.Factory.getInstance().newEditable("RIB: FR76 3000 1007 0002 3456 7Y02 168")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w(HomeActivity.TAG, "Failed to read value.", error.toException())
+            }
+        })
+
         binding.homebutton.setOnClickListener{
             startActivity(Intent(this, HomeActivity::class.java))
         }
@@ -82,41 +105,9 @@ class Compte_Activity : AppCompatActivity() {
             moyenPaiement.visibility = LinearLayout.VISIBLE
         }
 
-        /*binding.btnModifier.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            val view = LayoutInflater.from(this).inflate(R.layout.popup_modif_compte, null)
-            val mailTextField = view.findViewById<EditText>(R.id.mail_textfield)
-            builder.setView(view)
-
-            val nameRef = currentUser.child("name")
-            nameRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val name = dataSnapshot.getValue(String::class.java)
-                    name?.substringAfterLast(" ")
-                        ?.let { it1 -> currentUser.child(it1) }
-                        ?.addListenerForSingleValueEvent(object : ValueEventListener {
-                            override fun onDataChange(snapshot: DataSnapshot) {
-                                // Vérifier si l'email existe
-                                if (snapshot.exists()) {
-                                    // Récupérer l'email de l'utilisateur
-                                    val email = snapshot.getValue(String::class.java)
-                                    // Afficher l'email dans l'EditText
-                                    mailTextField.setText(email)
-                                }
-                            }
-
-                            override fun onCancelled(error: DatabaseError) {
-                                // Gérer l'erreur
-                            }
-                        })
-
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-            })
-        }*/
+        binding.btnModifier.setOnClickListener {
+            startActivity(Intent(this, modificationCompte_Activity::class.java))
+        }
 
             binding.notifButton.setOnClickListener{
             mesDonnes.visibility = LinearLayout.INVISIBLE
