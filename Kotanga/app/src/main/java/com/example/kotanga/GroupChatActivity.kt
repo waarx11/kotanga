@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.kotanga.databinding.ActivityGroupChatBinding
-import com.google.api.Distribution.BucketOptions.Linear
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -43,6 +42,7 @@ class GroupChatActivity : AppCompatActivity() {
     private lateinit var addUserInGroup: ImageButton
     private lateinit var groupLayout: LinearLayout
     private lateinit var currentUser: DatabaseReference
+    private lateinit var currentGroup: DatabaseReference
     private lateinit var groupName: String
     private lateinit var messageAdapter: ArrayAdapter<String>
 
@@ -68,8 +68,14 @@ class GroupChatActivity : AppCompatActivity() {
 
         //Récupération des users du groupes
 
-        val userListGroupe = mutableListOf<String>()
-        val usersRef = database.reference.child("users")
+
+
+
+        //Affichage des dépenses
+
+        val depenseList = findViewById<ListView>(R.id.depense_list)
+        // val adapter = DepensesAdapter(this,""" mettre la liste des dépenses""",""CurrentUser"")
+        //depenseList.adapter = adapter
 
 
         val spending_bouton = findViewById<Button>(R.id.group_spending_button)
@@ -80,8 +86,7 @@ class GroupChatActivity : AppCompatActivity() {
 
 
         val lightgrey = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_grey))
-        val primarycolor =
-            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.primary_color))
+        val primarycolor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.primary_color))
 
         val spinner = findViewById<Spinner>(R.id.depense_type_spinner)
         val adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
