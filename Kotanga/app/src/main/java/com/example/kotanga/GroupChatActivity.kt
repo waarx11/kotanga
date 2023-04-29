@@ -26,6 +26,10 @@ import com.google.firebase.ktx.Firebase
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.time.Instant.now
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.*
 
 
 class GroupChatActivity : AppCompatActivity() {
@@ -147,18 +151,25 @@ class GroupChatActivity : AppCompatActivity() {
             binding.depenses.visibility = LinearLayout.INVISIBLE
             binding.chatbutton.visibility = Button.VISIBLE
             binding.addDepenses.visibility = LinearLayout.VISIBLE
+            binding.addDepenseButton2.visibility = Button.VISIBLE
         }
 
         addDepense2.setOnClickListener {
             binding.depenses.visibility = LinearLayout.VISIBLE
             binding.addDepenses.visibility = LinearLayout.INVISIBLE
-            //mettre dans la base données
+            val depense = Depense()
+            depense.name = binding.depenseNameEditText.text.toString()
+            depense.type = binding.depenseTypeSpinner.selectedItem.toString()
+            depense.date = binding.depenseDateEdittexte.text.toString()
+            depense.price = binding.depensePriceEdittexte.text.toString().toFloat()
+            depense.priceType = binding.depensePriceSpinner.selectedItem.toString()
+            //depense.payBy = binding.depensePayBySpinner.selectedItem
+            //depense.payedFor = binding.depensePayToSpinner.text.toString()
+            addDepense(groupName, depense)
         }
 
 
         //ajout photo
-
-
         imageView = findViewById<ImageButton>(R.id.imageView)
         imageView.setOnClickListener {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -355,5 +366,11 @@ fun writeMessage(groupName: String, messageContent: String, authorName: String) 
 
 fun addDepense(groupName: String, depense: Depense){
     val database = Firebase.database
-    val groupRef = database.reference.child("groupes").child(groupName)
+    val groupeRef = database.reference.child("groupes").child(groupName)
+
+    // Récupérer une nouvelle clé pour la dépense
+    val depenseKey = groupeRef.child("depenses").push().key ?: return
+
+    // Enregistrer la dépense dans Firebase
+    groupeRef.child("depenses").child(depenseKey).setValue(depense)
 }
