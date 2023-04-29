@@ -1,6 +1,6 @@
 package com.example.kotanga
 
-import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
@@ -45,7 +45,6 @@ class GroupChatActivity : AppCompatActivity() {
     private lateinit var currentGroup: DatabaseReference
     private lateinit var groupName: String
     private lateinit var messageAdapter: ArrayAdapter<String>
-
     private lateinit var binding: ActivityGroupChatBinding
     private lateinit var dbManager: FirebaseManager
 
@@ -56,6 +55,7 @@ class GroupChatActivity : AppCompatActivity() {
         setContentView(binding.root)
         val groupNameTop = intent.getStringExtra("groupName")
 
+        this.setBackgroundColor()
 
         val messageEditText: EditText = findViewById(R.id.messageEditText)
 
@@ -251,6 +251,10 @@ class GroupChatActivity : AppCompatActivity() {
         addUserInGroup = findViewById(R.id.middle_button) // Ajout de l'ID du bouton
         //groupLayout = findViewById(R.id.group_layout) // Ajout de l'ID de la vue parente
 
+        addUserInGroup.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            val view = LayoutInflater.from(this).inflate(R.layout.popup_add_user_to_group, null)
+            builder.setView(view)
 
         addUserInGroup.setOnClickListener {
                 val builder = AlertDialog.Builder(this)
@@ -324,7 +328,9 @@ class GroupChatActivity : AppCompatActivity() {
                 dialog.show()
             }
 
-            binding.groupName.text = "$groupNameTop"
+            val dialog = builder.create()
+            dialog.show()
+        }
 
             binding.homebutton.setOnClickListener {
                 startActivity(Intent(this, HomeActivity::class.java))
@@ -345,22 +351,29 @@ class GroupChatActivity : AppCompatActivity() {
             messageAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
             binding.messageList.adapter = messageAdapter
 
-            val messageRef = database.getReference("groupes/$groupName/messages")
-            messageRef.orderByChild("timestamp").addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    for (childSnapshot in dataSnapshot.children) {
-                        val message = childSnapshot.getValue(Message::class.java)
-                        if (message != null) {
-                            val messageText = "${message.author}: ${message.content}"
-                            messageAdapter.add(messageText)
-                        }
+        messageAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
+        binding.messageList.adapter = messageAdapter
+
+        val messageRef = database.getReference("groupes/$groupName/messages")
+        messageRef.orderByChild("timestamp").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Vider l'adaptateur avant d'ajouter de nouveaux messages
+                messageAdapter.clear()
+
+                for (childSnapshot in dataSnapshot.children) {
+                    val message = childSnapshot.getValue(Message::class.java)
+                    if (message != null) {
+                        val messageText = "${message.author}: ${message.content}"
+                        messageAdapter.add(messageText)
                     }
                 }
+            }
 
-                override fun onCancelled(error: DatabaseError) {
+            override fun onCancelled(error: DatabaseError) {
+                // Gérer l'erreur ici
+            }
+        })
 
-                }
-            })
 
         binding.sendMessageButton.setOnClickListener {
             val messageContent = binding.messageEditText.text.toString()
@@ -381,6 +394,16 @@ class GroupChatActivity : AppCompatActivity() {
                 }
             })
             binding.messageEditText.text.clear()
+        }
+        }
+
+    private fun setBackgroundColor() {
+        val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        var isNightModeOn = sharedPreferences.getBoolean("isNightModeOn", false)
+        if (isNightModeOn) {
+            binding.root.setBackgroundColor(resources.getColor(R.color.primary_color_darkMode))
+        } else {
+            binding.root.setBackgroundColor(resources.getColor(R.color.primary_color))
         }
     }
 
